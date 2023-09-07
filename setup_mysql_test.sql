@@ -1,5 +1,5 @@
---create database for testing
---create a new user with privileges
+-- create database for testing
+-- create a new user with privileges
 CREATE DATABASE IF NOT EXISTS hbnb_test_db;
 USE hbnb_test_db;
 CREATE USER IF NOT EXISTS 'hbnb_test'@'localhost' IDENTIFIED BY 'hbnb_test_pwd';
