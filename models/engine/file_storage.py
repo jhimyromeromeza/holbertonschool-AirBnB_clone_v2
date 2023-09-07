@@ -35,6 +35,12 @@ class FileStorage:
         from models.amenity import Amenity
         from models.review import Review
 
+    def delete(self, obj=None):
+        """delete ob from __objects """
+        if obj is not None:
+            key = f"{str(obj.__class__.__name__)}.{obj.id}"
+            FileStorage.__objects.pop(key)
+
         classes = {
                     'BaseModel': BaseModel, 'User': User, 'Place': Place,
                     'State': State, 'City': City, 'Amenity': Amenity,
@@ -45,6 +51,6 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as f:
                 temp = json.load(f)
                 for key, val in temp.items():
-                        self.all()[key] = classes[val['__class__']](**val)
+                    self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
