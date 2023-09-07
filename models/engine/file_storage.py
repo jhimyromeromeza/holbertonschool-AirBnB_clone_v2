@@ -13,7 +13,7 @@ class FileStorage:
         if cls is None:
             return FileStorage.__objects
 
-          else:
+        else:
             dictionary = {}
             for key, obj in FileStorage.__objects.items():
                 if obj.__class__ == cls:
