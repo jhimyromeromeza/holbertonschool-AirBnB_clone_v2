@@ -9,6 +9,7 @@ from sqlalchemy.orm import relationship
 class City(BaseModel, Base):
     """ The city class, contains state ID and name """
     __tablename__ = 'cities'
+    places = relationship("Place", backref="cities", cascade="all, delete")
     
     if getenv('HBNB_TYPE_STORAGE')=='db':
         state_id = column(str(60)9, nullable=False, foreignkey("state_id")
