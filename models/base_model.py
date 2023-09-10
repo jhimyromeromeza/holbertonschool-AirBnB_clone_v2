@@ -5,17 +5,17 @@ from datetime import datetime
 import models
 from sqlalchemy import Column, String, Integer, Datetime
 from sqlalchemy.ext.declarative import declarative_base
-
+import os
 
 Base = declarative_base()
 
 
-class BaseModel(Base):
+class BaseModel:
     """sql alchemy database 'datetime in columns, create and update'"""
-
-    id: Column(String(60), primary_key=True, nullable=False)
-    created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
-    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
+    if os.getenv("HBNB_TYPE_STORAGE") == "db":
+        id = Column(String(60), primary_key=True, nullable=False)
+        created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
+        updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
 
     """A base class for all hbnb models"""
     def __init__(self, *args, **kwargs):
