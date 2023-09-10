@@ -4,7 +4,7 @@ from models.base_model import BaseModel
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String
 
-BaseModel = declarative_base()
+Base = declarative_base()
 
 
 class User(BaseModel, Base):
