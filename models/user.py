@@ -3,7 +3,7 @@
 from models.base_model import BaseModel
 from sqlalchemy.ext.declarative import declarative_base
 
-BaseModel = declarativee_base()
+BaseModel = declarative_base()
 
 
 class User(BaseModel, Base):
