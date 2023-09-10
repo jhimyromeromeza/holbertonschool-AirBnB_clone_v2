@@ -11,7 +11,7 @@ class City(BaseModel, Base):
     __tablename__ = 'cities'
     
     if getenv('HBNB_TYPE_STORAGE')=='db':
-        state_id = Column(String(60), nullable=False, Foreignkey("state_id"))
+        state_id = Column(String(60), Foreignkey("state_id"), nullable=False)
         name = Column(String(128), nullable=False)
 
             
