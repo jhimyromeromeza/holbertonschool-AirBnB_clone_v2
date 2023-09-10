@@ -16,9 +16,12 @@ class State(BaseModel, Base)
 
     if getenv("HBNB_TYPE_STORAGE") =="db":
         name = column(str(128)), nullable=False
-
+        cities = relationship("City", backref="state", cascade="all, delete")
     else:
-         @property
+        name:""
+
+
+    @property
     def cities(self):
       Zcity = []
       for city in models.storage.all('City').values():
