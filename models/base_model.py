@@ -13,7 +13,7 @@ Base = declarative_base()
 class BaseModel(Base):
     """sql alchemy database 'datetime in columns, create and update'"""
 
-    id: column(String(60), primary_key=True, nullable=False)
+    id: Column(String(60), primary_key=True, nullable=False)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
 
