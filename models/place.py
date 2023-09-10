@@ -14,4 +14,14 @@ class Place(BaseModel, Base):
     max_guest = Column(Integer, nullable=False, default=0)
     price_by_night = Column(Integer, nullable=False, default=0)
     latitude = Column(Float, nullable=True)
-    longitude = Column(Float, nullable=True)                            
+    longitude = Column(Float, nullable=True)
+
+    if getenv('HBNB_TYPE_STORAGE') == 'db':
+        reviews = relationship("Review", backref="place", cascade="all, delete")
+    else:
+        @property
+        def reviews(self):
+            """Returns the list of Review instances with place_id equals to the current Place.id"""
+            from models import storage
+            all_reviews = storage.all(Review)
+            return [review for review in all_reviews.values() if review.place_id == self.id]
