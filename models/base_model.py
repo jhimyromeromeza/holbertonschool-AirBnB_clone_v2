@@ -10,7 +10,7 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 
-class BaseModel:
+class BaseModel(Base):
     """sql alchemy database 'datetime in columns, create and update'"""
 
     id: column(String(60), primary_key=True, nullable=False)
