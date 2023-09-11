@@ -2,7 +2,7 @@
 """This module defines a class User"""
 from models.base_model import BaseModel
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, String
+from sqlalchemy import Column, String, integer
 from models.base_model import Base
 from sqlalchemy.orm import relationship
 import os
@@ -11,6 +11,8 @@ import os
 class User(BaseModel, Base):
     """This class defines a user by various attributes"""
     __tablename__ = 'users'
+
+    id = Column(Integer, primary_key=True)
 
     if os.getenv("HBNB_TYPE_STORAGE") == "db":
         email = Column(String(128), nullable=False)
