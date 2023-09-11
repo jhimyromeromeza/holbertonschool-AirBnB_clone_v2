@@ -25,3 +25,4 @@ class State(BaseModel, Base):
                     list_cities.append(k)
 
             return l_cities
+
