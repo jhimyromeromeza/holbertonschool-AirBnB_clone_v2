@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 """ City Module for HBNB project """
 from os import getenv
 import models
@@ -8,24 +7,22 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
 
-
-
-class State(BaseModel, Base)
-    """ State class """
+class State(BaseModel, Base):
+    """ Model State for a MySQL db"""
     __tablename__ = "states"
 
-    name = Column(String(128), nullable=False)
-
-    if getenv("HBNB_TYPE_STORAGE") =="db":
-        cities = relationship("City", cascade="all, delete", backref="state")
-
+    if getenv('HBNB_TYPE_STORAGE') == 'db':
+        name = Column(String(128), nullable=False)
+        cities = relationship("City", backref="state", cascade="all, delete")
     else:
+        name = ""
+
         @property
         def cities(self):
-            "return the list of instances from City"
-            from models import storage
-            list_cities = []
+            l_cities = []
             for k in models.storage.all('City').values():
                 if k.state_id == self.id:
                     list_cities.append(k)
-            return list_cities
+
+            return l_cities
+
