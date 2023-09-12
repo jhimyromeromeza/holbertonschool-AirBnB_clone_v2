@@ -231,12 +231,11 @@ class HBNBCommand(cmd.Cmd):
 
         if os.getenv('HBNB_TYPE_STORAGE') == 'db':
             storageZ = storage.all(eval(args))
-
         else:
             storageZ = storage._FileStorage__objects
 
         if args:
-            args = args.split(' ')[0]  # remove possible trailing args
+            args = args.split(' ')[0]
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
