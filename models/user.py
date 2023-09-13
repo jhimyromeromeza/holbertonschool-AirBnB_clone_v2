@@ -4,7 +4,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 from os import getenv
-from sqlalchemy.ext.declarative import declarative_base
+
 
 if getenv('HBNB_TYPE_STORAGE') == 'db':
     class User(BaseModel, Base):
@@ -16,7 +16,7 @@ if getenv('HBNB_TYPE_STORAGE') == 'db':
         first_name = Column(String(128), nullable=True)
         last_name = Column(String(128), nullable=True)
 
-        places = relationship ("Place", backref="user", cascade="all, delete")
+        places = relationship("Place", backref="user", cascade="all, delete")
 
 else:
     class User(BaseModel):
