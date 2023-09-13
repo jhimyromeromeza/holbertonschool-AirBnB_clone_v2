@@ -33,23 +33,19 @@ class DBStorage:
 
     def all(self, cls=None):
         """ Method that queries on the currect database session """
-        objects = {}
-
+        db = {}
+        all_classes = ['User', 'Review', 'Place', 'City', 'State']
         if cls is None:
-            clasess = ['User', 'State', 'City', 'Amenity', 'Place', 'Review']
-
-            for class_name in clasess:
-                class_obj = getattr(models, class_name)
-                all_objects = self.__session.query(class_obj).all()
-                objects_dict = {f"{class_name}.{obj.id}": obj for obj in all_objects}
-
-                objects.update(objects_dict)
-
+            for cl in all_classes:
+                cl = eval(cl)
+                for instance in self.__session.query(cl).all():
+                    key = instance.__class__.__name__ + '.' + instance.id
+                    db[key] = instance
         else:
-            class_cls = self.__session.query(cls).all()
-            objects = {f"{type(obj).__name__}.{obj.id}": obj for obj in class_cls}
-
-        return objects
+            for instance in self.__session.query(cls).all():
+                key = instance.__class__.__name__ + '.' + instance.id
+                db[key] = instance
+        return db
 
     def new(self, obj):
         """ add object to the current database session """
@@ -69,8 +65,4 @@ class DBStorage:
         Base.metadata.create_all(self.__engine)
         session_fac = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(session_fac)
-        self.__session = Session
-
-    def close(self):
-        """Close the databse"""
-        self.__session.close()
+        self.__session = Session()
