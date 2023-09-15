@@ -4,7 +4,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey, Integer, Float, Table
 from os import getenv
 from sqlalchemy.orm import relationship
-
+from models.review import Review
 
 if getenv('HBNB_TYPE_STORAGE') == 'db':
     place_amenity = Table(

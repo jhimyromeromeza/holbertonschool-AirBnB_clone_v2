@@ -23,8 +23,9 @@ else:
 
     @property
     def cities(self):
-        l_cities = []
-        for k in models.storage.all('City').values():
-            if k.state_id == self.id:
-                list_cities.append(k)
-        return l_cities
+    new_list_cities = []
+        for city in models.storage.all('City').values():
+            if city.state_id == self.id:
+                new_list_cities.append(city)
+
+        return new_list_cities
