@@ -12,13 +12,13 @@ def hello():
     This function handles the root path of the application and returns the message 'Hello HBNB!'.
     """
     return "Hello HBNB!"
-@app.route('/hbnb', strict_slashe=False)
+@app.route('/hbnb', strict_slashes=False)
 def hbnb():
     """
     This function manage a route hbnb and returns the message 'HBNB'.
     """
     return "HBNB"
-@app.route('/c/<text>')
+@app.route('/c/<text>', strict_slashes=False)
 def c_text(text):
     """
     This is a function that returns a text according to parameter. 
