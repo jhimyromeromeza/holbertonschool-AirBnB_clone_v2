@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-from flask import Flask
 """
 this is a simple module with route
 """
+from flask import Flask
+
 app = Flask(__name__)
 
 @app.route('/', strict_slashes=False)
@@ -14,7 +15,7 @@ def hello():
 @app.route('/hbnb', strict_slashes=False)
 def display():
     """
-    This function manahe a route hbnb and returns the message 'HBNB'.
+    This function manage a route hbnb and returns the message 'HBNB'.
     """
     return "HBNB"
 
