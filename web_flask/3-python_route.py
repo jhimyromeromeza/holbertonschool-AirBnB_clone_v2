@@ -24,6 +24,7 @@ def c_text(text):
     This is a function that returns a text according to parameter. 
     """
     return "C {}".format(text.replace('_', ' '))
+@app.route('/python/', defaults={'text': "is cool"}, strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def python_text(text):
     """
