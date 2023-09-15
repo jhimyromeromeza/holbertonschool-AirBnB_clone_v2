@@ -21,10 +21,10 @@ else:
 
 
 
-    """@property
+    @property
     def cities(self):
         l_cities = []
         for k in models.storage.all('City').values():
             if k.state_id == self.id:
                 list_cities.append(k)
-        return l_cities"""
+        return l_cities

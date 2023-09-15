@@ -21,7 +21,13 @@ if getenv('HBNB_TYPE_STORAGE') == 'db':
         latitude = Column(Float, nullable=True)
         longitude = Column(Float, nullable=True)
         amenity_ids = []
-
+        review = 'Review'
+        rlt = relationship
+        amnt = 'Amenity'
+        p_a = place_amenity
+        pstr = "place_amenities"
+        f = False
+        amenities = rlt(amnt, secondary=p_a, back_populates=pstr, viewonly=f)
 
         reviews = relationship("Review", backref="place", cascade="all, delete-orphan")
 
@@ -42,3 +48,26 @@ else :
         amenity_ids = []
 
 
+        @property
+        def reviews(self):
+            ''' Return all reviews '''
+            view_list = []
+            for review in list(models.storage.all(Review).values()):
+                if review.place_id == self.id:
+                    view_list.append(review)
+            return view_list
+
+        @property
+        def amenities(self):
+            from models.review import Amenity
+            amens = storage.all(Amenity)
+            ids = amenity_ids
+            list_amens = [amen for amen in amens.values() if amen.id in ids]
+            return list_amens
+
+        @amenities.setter
+        def amenities(self, obj):
+            if obj.__class__.__name__ == "Amenity":
+                amenity_ids.append(obj.id)
+            else:
+                pass
