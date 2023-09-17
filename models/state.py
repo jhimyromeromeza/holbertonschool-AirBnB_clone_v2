@@ -23,9 +23,5 @@ else:
 
     @property
     def cities(self):
-    new_list_cities = []
-        for city in models.storage.all('City').values():
-            if city.state_id == self.id:
-                new_list_cities.append(city)
-
-        return new_list_cities
+        """Obtiene todas las ciudades de un estado"""
+        return [city for city in models.storage.all(City).values() if city.state_id == self.id]
