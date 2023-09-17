@@ -23,4 +23,5 @@ class State(BaseModel, Base):
         """get a list of all related city instances
         with state_id = to the current state id
         """
-        return [city for city in models.storage.all(City).values() if city.state_id == self.id]
+        if getenv("HBNB_TYPE_STORAGE") != "db":
+            return [city for city in models.storage.all(City).values() if city.state_id == self.id]
