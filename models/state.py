@@ -16,10 +16,8 @@ if getenv("HBNB_TYPE_STORAGE") =="db":
         cities = relationship("City", backref="state", cascade="all, delete")
 
 else:
-    class State(BaseModel):
-        name = ""
-
-
+    name = ""
+    cities = []
 
     @property
     def cities(self):
